@@ -1,7 +1,22 @@
+"use client";
 import Particles from "@/components/Particles";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+
+   const { user } = useDynamicContext();
+   const isAuthenticated = user !== null;
+   const router = useRouter();
+
+   useEffect(() => {
+     if (isAuthenticated) {
+       router.push("/dashboard");
+     } else {
+        router.push("/");
+      }
+   }, [isAuthenticated, router]);
   return (
     <section className=" text-white font-lond">
       <Particles
