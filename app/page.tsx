@@ -12,7 +12,7 @@ export default function Home() {
 
    useEffect(() => {
      if (isAuthenticated) {
-       router.push("/dashboard");
+       router.push("/");
      } else {
         router.push("/");
       }
@@ -26,7 +26,7 @@ export default function Home() {
       <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-[calc(100vh-80px)] lg:items-center lg:justify-center">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl text-mont">
-            Revolutionizing the Learning
+            Revolutionizing your DAO&apos;s Community 
             <span className="sm:block"> Experience with AI </span>
           </h1>
 
@@ -60,13 +60,6 @@ export default function Home() {
                 Get Started
               </span>
             </div>
-
-            {/* <a
-          className="block w-full rounded border border-blue-600 px-12 py-3 text-sm font-medium text-white hover:bg-blue-600 focus:outline-none focus:ring active:bg-blue-500 sm:w-auto"
-          href="/about"
-        >
-          Learn More
-        </a> */}
           </div>
         </div>
       </div>

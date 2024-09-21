@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import Head from "next/head";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const CreateDaoPage = () => {
   const router = useRouter();
@@ -13,26 +14,45 @@ const CreateDaoPage = () => {
     daoDescription: "",
     daoIcon: "",
   });
+  const [previewIcon, setPreviewIcon] = useState<string | null>(null);
+  const [fileUploaded, setFileUploaded] = useState(false);
 
   const handleValuesChange =
     (key: keyof typeof values) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      setValues((prev) => {
-        return { ...prev, [key]: e.target.value };
-      });
+      setValues((prev) => ({ ...prev, [key]: e.target.value }));
     };
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  // Handle image generation
+  const handleImageGeneration = () => {
+    const randomImageUrl = `https://noun-api.com/beta/pfp`;
+    setPreviewIcon(randomImageUrl);
+    setValues((prev) => ({ ...prev, daoIcon: randomImageUrl }));
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewIcon(reader.result as string);
+        setFileUploaded(true);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(values);
     alert("DAO Registration data has been logged.");
-    router.push("/dao-dashboard");
+    router.push("/dashboard");
   };
 
   return (
     <>
       <Head>
-        <title>Register DAO | Volt Armour</title>
+        <title>Register DAO | DOG</title>
       </Head>
       <main className="min-h-screen bg-[url('/assets/hero-bg.png')] w-full font-lond text-stone-200">
         <section className="p-4 md:px-16 lg:max-w-4xl lg:mx-auto py-[40px] ">
@@ -78,20 +98,43 @@ const CreateDaoPage = () => {
               />
             </div>
 
-            {/* DAO Icon Input */}
+            {/* File Upload or Image Generation */}
             <div className="grid w-full items-center gap-2">
               <Label htmlFor="daoIcon" className="text-sm font-semibold">
-                DAO Icon (URL)
+                DAO Icon
               </Label>
-              <Input
-                id="daoIcon"
-                onChange={handleValuesChange("daoIcon")}
-                required
-                type="text"
-                className="h-12"
-                placeholder="Enter URL of DAO Icon"
-              />
+              <div className="flex gap-4 items-center">
+                <Input
+                  id="fileUpload"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileUpload}
+                  disabled={fileUploaded}
+                />
+                <Button
+                  type="button"
+                  onClick={handleImageGeneration}
+                  disabled={fileUploaded}
+                >
+                  Generate Random Image
+                </Button>
+              </div>
             </div>
+
+            {/* Preview */}
+            {previewIcon && (
+              <div className="mt-4">
+                <h3 className="font-semibold">Preview:</h3>
+                <Image
+                  unoptimized
+                  src={previewIcon}
+                  alt="Generated DAO Icon"
+                  width={100}
+                  height={100}
+                  className="mt-2 w-32 h-32"
+                />
+              </div>
+            )}
 
             {/* Submit Button */}
             <Button

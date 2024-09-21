@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface Card {
   id: number;
@@ -15,13 +16,13 @@ const cards: Card[] = [
     id: 1,
     title: "Card 1",
     description: "This is the first card",
-    image: "", // Add image URL
+    image: "https://nouns.center/earth.gif", // Add image URL
   },
   {
     id: 2,
     title: "Card 2",
     description: "This is the second card",
-    image: "", // Add image URL
+    image: "https://nouns.center/earth.gif", // Add image URL
   },
   // Add more cards to the array as needed
 ];
@@ -55,30 +56,28 @@ function Dashboard() {
         </div>
       ) : (
         <>
-
-          
-
           {/* DAO Cards Section */}
           <div className="mx-auto px-8 py-16">
             <div className="flex gap-4">
               <h1 className="text-4xl font-semibold text-left mb-12">
                 Your DAOs
               </h1>
-              <Button className="px-4 py-2 bg-emerald-500 text-white font-semibold rounded-md hover:bg-emerald-600 transition">
+              <Button className="px-4 text-md  tracking-widest py-2 bg-white text-emerald-500 font-semibold rounded-md hover:text-emerald-600 transition">
                 Register DAO
               </Button>
-              <Button className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition">
+              <Button className="px-4  text-md py-2 tracking-widest bg-white text-blue-500 font-semibold rounded-md hover:text-blue-600 transition">
                 Join DAO
               </Button>
             </div>
-            <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {cards.map((card) => (
-                <li
+                <Link
+                  href={`/dao/${card.id}`}
                   key={card.id}
                   className="bg-white shadow-md rounded-lg p-4 transition-transform transform hover:scale-105"
                 >
                   <Image
-                    src={"https://nouns.center/earth.gif"}
+                    src={card.image}
                     alt={card.title}
                     width={200}
                     height={200}
@@ -90,9 +89,9 @@ function Dashboard() {
                     </h2>
                     <p className="text-gray-600">{card.description}</p>
                   </div>
-                </li>
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
         </>
       )}
