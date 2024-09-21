@@ -37,8 +37,6 @@ const ContributorCommunity = () => {
         selectedChannel={selectedChannel}
         setSelectedChannel={setSelectedChannel}
       />
-
-      {/* Chat Area */}
       <div className="flex-1">
         <ChatArea
           selectedChannel={selectedChannel}
