@@ -12,7 +12,7 @@ import { Menu } from "lucide-react";
 import { NAVBAR_NAVIGATION } from "@/constants/navigation";
 import Image from "next/image";
 import { Button } from "./ui/button";
-import {  DynamicWidget } from '@dynamic-labs/sdk-react-core';
+import { DynamicWidget } from "@dynamic-labs/sdk-react-core";
 
 function Navbar() {
   return (
@@ -20,10 +20,10 @@ function Navbar() {
       <Link href={"/"}>
         <h1 className="text-2xl font-semibold">
           <Image
-            src={"/assets/delance-yellow.png"}
+            src={"https://i.ibb.co/QDMJ9mR/Dog-1.png"}
             width={1080}
             height={1920}
-            alt="image"
+            alt="image1"
             className="w-20 p-2"
           />
         </h1>
@@ -42,7 +42,9 @@ function Navbar() {
               </Button>
             </li>
           ))}
-          <li><DynamicWidget /></li>
+          <li>
+            <DynamicWidget />
+          </li>
         </ul>
       </div>
       <div className="lg:hidden">
@@ -70,7 +72,9 @@ function Navbar() {
                         </Button>
                       </li>
                     ))}
-                    <li><DynamicWidget /></li>
+                    <li>
+                      <DynamicWidget />
+                    </li>
                   </ul>
                 </nav>
               </SheetDescription>
