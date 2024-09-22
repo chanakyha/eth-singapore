@@ -5,18 +5,17 @@ import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const { user } = useDynamicContext();
+  const isAuthenticated = user !== null;
+  const router = useRouter();
 
-   const { user } = useDynamicContext();
-   const isAuthenticated = user !== null;
-   const router = useRouter();
-
-   useEffect(() => {
-     if (isAuthenticated) {
-       router.push("/");
-     } else {
-        router.push("/");
-      }
-   }, [isAuthenticated, router]);
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/");
+    } else {
+      router.push("/");
+    }
+  }, [isAuthenticated, router]);
   return (
     <section className=" text-white font-lond">
       <Particles
@@ -26,7 +25,7 @@ export default function Home() {
       <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-[calc(100vh-80px)] lg:items-center lg:justify-center">
         <div className="mx-auto max-w-3xl text-center">
           <h1 className="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text text-3xl font-extrabold text-transparent sm:text-5xl text-mont">
-            Revolutionizing your DAO&apos;s Community 
+            Revolutionizing your DAO&apos;s Community
             <span className="sm:block"> Experience with AI </span>
           </h1>
 
@@ -36,9 +35,7 @@ export default function Home() {
           </p>
 
           <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <div
-              className="group relative inline-flex items-center overflow-hidden rounded-full bg-slate-900/80 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500"
-            >
+            <div className="group relative inline-flex items-center overflow-hidden rounded-full bg-slate-900/80 px-8 py-3 text-white focus:outline-none focus:ring active:bg-indigo-500">
               <span className="absolute -end-full transition-all group-hover:end-4">
                 <svg
                   className="h-5 w-5 rtl:rotate-180"
